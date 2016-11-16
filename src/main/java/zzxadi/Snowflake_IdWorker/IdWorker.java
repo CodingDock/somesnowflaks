@@ -91,6 +91,7 @@ public class IdWorker {
         // System.out.println(Long.toBinaryString(idWorker.nextId()));
         System.out.println(idWorker.nextId());
         System.out.println(idWorker.nextId());
+        
 //
 //        long start = System.currentTimeMillis();
 //        Set<Long> set = new HashSet<>();
