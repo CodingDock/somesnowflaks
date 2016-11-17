@@ -4,6 +4,9 @@ package zzxadi.Snowflake_IdWorker;
  * Created by 肖明明 on 2016/11/9.
  */
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +24,7 @@ public class IdWorker {
 //    private final static Logger logger = LoggerFactory.getLogger(IdWorker.class);
 
     private final long workerId;
-    private final long epoch = 1403854494756L;   // 时间起始标记点，作为基准，一般取系统的最近时间
+    private final long epoch = 1479365583074L;   // 时间起始标记点，作为基准，一般取系统的最近时间
     private final long workerIdBits = 10L;      // 机器标识位数
     private final long maxWorkerId = -1L ^ -1L << this.workerIdBits;// 机器ID最大值: 1023
     private long sequence = 0L;                   // 0，并发控制
@@ -80,17 +83,28 @@ public class IdWorker {
     /**
      * 获得系统当前毫秒数
      */
+    
+    static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static long timeGen() {
-        return System.currentTimeMillis();
+
+        try {
+            return sdf.parse("2018-10-10 12:13:57").getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+
+//        return System.currentTimeMillis();
     }
 
     public static void main(String[] args) throws Exception {
 //        System.out.println(timeGen());
 //
-        IdWorker idWorker = IdWorker.getFlowIdWorkerInstance();
-        // System.out.println(Long.toBinaryString(idWorker.nextId()));
-        System.out.println(idWorker.nextId());
-        System.out.println(idWorker.nextId());
+//        IdWorker idWorker = IdWorker.getFlowIdWorkerInstance();
+//        // System.out.println(Long.toBinaryString(idWorker.nextId()));
+//        System.out.println(idWorker.nextId());
+//        System.out.println(idWorker.nextId());
         
 //
 //        long start = System.currentTimeMillis();
@@ -108,6 +122,8 @@ public class IdWorker {
 //        }
 //        System.out.println(set.size());
 //        System.out.println("Elapsed time : " + (System.currentTimeMillis() - start));
+
+//        System.out.println(new Date().getTime());
     }
 
 }
